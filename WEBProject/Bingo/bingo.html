@@ -4,56 +4,73 @@
     <meta charset="UTF-8">
     <title>Bingo Challenge</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <h1>Bingo Challenge</h1>
+    <div id="bingo-content">
+        <h1>Bingo Challenge</h1>
 
-    <p>
-        Ova igra se igra tako što pronađete osobe koje odgovaraju opisima u svakoj
-        ćeliji. Kada pronađete odgovarajuću osobu, označite tu ćeliju. Cilj je popuniti
-        cijeli red, kolonu ili dijagonalu kao u pravom bingo izazovu.
-    </p>
+        <p>
+            Ova igra se igra tako što pronađete osobe koje odgovaraju opisima u svakoj
+            ćeliji. Kada pronađete odgovarajuću osobu, označite tu ćeliju. Cilj je popuniti
+            cijeli red, kolonu ili dijagonalu kao u pravom bingo izazovu.
+        </p>
 
-    <table>
-        <tr>
-            <td>Omiljena boja je plava.</td>
-            <td>Voli crtati.</td>
-            <td>Voli čitati.</td>
-            <td>Ima kućnog ljubimca.</td>
-            <td>Putovao van Evrope.</td>
-        </tr>
-        <tr>
-            <td>Voli čokoladu.</td>
-            <td>Gleda anime.</td>
-            <td>Zna kuhati.</td>
-            <td>Voli programiranje.</td>
-            <td>Trči svako jutro.</td>
-        </tr>
-        <tr>
-            <td>Sluša rock muziku.</td>
-            <td>Pije kafu svaki dan.</td>
-            <td><b>SLOBODAN PROSTOR.</b></td>
-            <td>Gleda dokumentarce.</td>
-            <td>Voli matematiku.</td>
-        </tr>
-        <tr>
-            <td>Igra video igre.</td>
-            <td>Pije čaj.</td>
-            <td>Uči brzo.</td>
-            <td>Govori dva jezika.</td>
-            <td>Voli putovati.</td>
-        </tr>
-        <tr>
-            <td>Piše pjesme.</td>
-            <td>Voli mačke.</td>
-            <td>Voli pse.</td>
-            <td>Često koristi TikTok.</td>
-            <td>Sluša techno.</td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td>Omiljena boja je plava.</td>
+                <td>Voli crtati.</td>
+                <td>Voli čitati.</td>
+                <td>Ima kućnog ljubimca.</td>
+                <td>Putovao van Evrope.</td>
+            </tr>
+            <tr>
+                <td>Voli čokoladu.</td>
+                <td>Gleda anime.</td>
+                <td>Zna kuhati.</td>
+                <td>Voli programiranje.</td>
+                <td>Trči svako jutro.</td>
+            </tr>
+            <tr>
+                <td>Sluša rock muziku.</td>
+                <td>Pije kafu svaki dan.</td>
+                <td><b>SLOBODAN PROSTOR.</b></td>
+                <td>Gleda dokumentarce.</td>
+                <td>Voli matematiku.</td>
+            </tr>
+            <tr>
+                <td>Igra video igre.</td>
+                <td>Pije čaj.</td>
+                <td>Uči brzo.</td>
+                <td>Govori dva jezika.</td>
+                <td>Voli putovati.</td>
+            </tr>
+            <tr>
+                <td>Piše pjesme.</td>
+                <td>Voli mačke.</td>
+                <td>Voli pse.</td>
+                <td>Često koristi TikTok.</td>
+                <td>Sluša techno.</td>
+            </tr>
+        </table>
+    </div>
 
     <button class="pdf-btn">Preuzmi kao PDF</button>
+
+    <script>
+        document.querySelector(".pdf-btn").addEventListener("click", () => {
+            const element = document.getElementById("bingo-content");
+            const options = {
+                margin:       0.5,
+                filename:     'Bingo_Challenge.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(options).from(element).save();
+        });
+    </script>
 
 </body>
 </html>
