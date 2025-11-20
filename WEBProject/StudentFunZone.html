@@ -4,6 +4,107 @@
     <meta charset="utf-8">
     <title>Kursevi IPI - Student Fun Zone</title>
     <link rel="stylesheet" href="izgled.css">
+    <style>
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .dropdown-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .dropdown-toggle:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            margin-top: 5px;
+            overflow: hidden;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #2c3e50;
+            text-decoration: none;
+            border-bottom: 1px solid #e1e8ed;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Close dropdown when clicking outside */
+        .dropdown-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+        }
+
+        .dropdown-backdrop.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,18 +128,82 @@
         <h2>Student Fun Zone</h2>
         <p>Odaberite jednu igru!</p>
 
-        <ul>
-            <li><a href="Bingo/bingo.html">Bingo</a></li>
-            <li><a href="Kviz/quiz.html">Kviz</a></li>
-			<li><a href="index1.html">Kanban Ploca</a></li>
-			<li><a href="index2.html">Vision Board</a></li>
-			<li><a href="index3.html">Interaktivni Whiteboard</a></li>
-        </ul>
+        <div class="dropdown">
+            <button class="dropdown-toggle" type="button" id="gamesDropdown">
+                Odaberite igru 
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="Bingo/bingo.html" class="dropdown-item">Bingo</a>
+                <a href="Kviz/quiz.html" class="dropdown-item">Kviz</a>
+                <a href="index1.html" class="dropdown-item">Kanban Ploča</a>
+                <a href="index2.html" class="dropdown-item">Vision Board</a>
+                <a href="index3.html" class="dropdown-item">Interaktivni Whiteboard</a>
+            </div>
+            <div class="dropdown-backdrop" id="dropdownBackdrop"></div>
+        </div>
     </article>
 
     <footer>
         &copy; Internacionalna poslovno-informaciona akademija Tuzla
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.getElementById('gamesDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const dropdownBackdrop = document.getElementById('dropdownBackdrop');
+
+            // Toggle dropdown
+            dropdownToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = dropdownMenu.classList.contains('show');
+                
+                if (isOpen) {
+                    closeDropdown();
+                } else {
+                    openDropdown();
+                }
+            });
+
+            // Close dropdown when clicking on backdrop
+            dropdownBackdrop.addEventListener('click', function() {
+                closeDropdown();
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    closeDropdown();
+                }
+            });
+
+            // Close dropdown when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeDropdown();
+                }
+            });
+
+            function openDropdown() {
+                dropdownMenu.classList.add('show');
+                dropdownBackdrop.classList.add('show');
+                dropdownToggle.style.borderRadius = '8px 8px 0 0';
+            }
+
+            function closeDropdown() {
+                dropdownMenu.classList.remove('show');
+                dropdownBackdrop.classList.remove('show');
+                dropdownToggle.style.borderRadius = '8px';
+            }
+
+            // Update button text when selecting an item
+            dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    dropdownToggle.textContent = this.textContent + ' ▼';
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

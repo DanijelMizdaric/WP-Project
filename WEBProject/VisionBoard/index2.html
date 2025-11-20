@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision Board</title>
+    <link rel="stylesheet" href="style2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <h1>Student Fun Zone - Vision Board</h1>
+    
+    <div class="toolbar">
+        <button id="addNoteBtn">+ Post It</button>
+        <button id="addImageBtn">+ Slika</button>
+        <button id="addQuoteBtn">+ Citat</button>
+        <button id="saveBtn">Snimi</button>
+        <button id="savePdfBtn">Preuzmi PDF</button>
+        <button id="sendEmailBtn">Pošalji mailom</button>
+        <button id="clearBtn">Ocisti Plocu</button>
+    </div>
+    
+    <div id="board" class="vision-board-content"></div>
+    
+    <!-- Email Modal -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <h3>Pošalji Vision Board mailom</h3>
+            <input type="email" id="emailInput" placeholder="Unesite email adresu..." />
+            <div class="modal-buttons">
+                <button id="emailSend">Pošalji</button>
+                <button id="emailCancel">Poništi</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Web programiranje 2025 © Internacionalna poslovno-informaciona akademija Tuzla</p>
+    </footer>
+    
+    <script src="javascript2.js"></script>
+    <script>
+        // PDF Export Functionality
+        document.getElementById('savePdfBtn').addEventListener('click', () => {
+            const element = document.getElementById('board');
+            const options = {
+                margin: 0.5,
+                filename: 'Vision_Board.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(options).from(element).save();
+        });
+
+        // Email Modal Functionality
+        document.getElementById('sendEmailBtn').addEventListener('click', () => {
+            document.getElementById('emailModal').style.display = 'block';
+        });
+
+        document.getElementById('emailCancel').addEventListener('click', () => {
+            document.getElementById('emailModal').style.display = 'none';
+            document.getElementById('emailInput').value = '';
+        });
+
+        document.getElementById('emailSend').addEventListener('click', () => {
+            const email = document.getElementById('emailInput').value;
+            if (email) {
+                // Get content from the vision board
+                const notes = Array.from(document.querySelectorAll('.note')).map(note => 
+                    `• Post It: ${note.textContent || note.innerText}`
+                );
+                
+                const quotes = Array.from(document.querySelectorAll('.quote')).map(quote => 
+                    `• Citat: ${quote.textContent || quote.innerText}`
+                );
+                
+                const images = Array.from(document.querySelectorAll('.pinned-img')).map(img => 
+                    `• Slika: ${img.querySelector('img')?.alt || 'Dodana slika'}`
+                );
+
+                // Create email content
+                const subject = 'Moj Vision Board';
+                const body = `Moj Vision Board sadržaj:\n\n` +
+                            `POST IT BILJEŠKE:\n${notes.length > 0 ? notes.join('\n') : 'Nema bilješki'}\n\n` +
+                            `CITATI:\n${quotes.length > 0 ? quotes.join('\n') : 'Nema citata'}\n\n` +
+                            `SLIKE:\n${images.length > 0 ? images.join('\n') : 'Nema slika'}\n\n` +
+                            `\nPoslano sa Student Fun Zone Vision Board aplikacije.`;
+
+                // Create mailto link
+                const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Close modal and clear input
+                document.getElementById('emailModal').style.display = 'none';
+                document.getElementById('emailInput').value = '';
+            } else {
+                alert('Molimo unesite email adresu!');
+            }
+        });
+
+        // Close email modal when clicking outside
+        window.addEventListener('click', (event) => {
+            const emailModal = document.getElementById('emailModal');
+            if (event.target === emailModal) {
+                emailModal.style.display = 'none';
+                document.getElementById('emailInput').value = '';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.getElementById('emailModal').style.display = 'none';
+                document.getElementById('emailInput').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
