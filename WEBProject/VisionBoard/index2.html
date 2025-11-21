@@ -22,7 +22,7 @@
     
     <div id="board" class="vision-board-content"></div>
     
-    <!-- Email Modal -->
+ 
     <div id="emailModal" class="modal">
         <div class="modal-content">
             <h3>Pošalji Vision Board mailom</h3>
@@ -40,7 +40,7 @@
     
     <script src="javascript2.js"></script>
     <script>
-        // PDF Export Functionality
+       
         document.getElementById('savePdfBtn').addEventListener('click', () => {
             const element = document.getElementById('board');
             const options = {
@@ -56,7 +56,7 @@
             html2pdf().set(options).from(element).save();
         });
 
-        // Email Modal Functionality
+        
         document.getElementById('sendEmailBtn').addEventListener('click', () => {
             document.getElementById('emailModal').style.display = 'block';
         });
@@ -69,7 +69,7 @@
         document.getElementById('emailSend').addEventListener('click', () => {
             const email = document.getElementById('emailInput').value;
             if (email) {
-                // Get content from the vision board
+                
                 const notes = Array.from(document.querySelectorAll('.note')).map(note => 
                     `• Post It: ${note.textContent || note.innerText}`
                 );
@@ -82,7 +82,7 @@
                     `• Slika: ${img.querySelector('img')?.alt || 'Dodana slika'}`
                 );
 
-                // Create email content
+                
                 const subject = 'Moj Vision Board';
                 const body = `Moj Vision Board sadržaj:\n\n` +
                             `POST IT BILJEŠKE:\n${notes.length > 0 ? notes.join('\n') : 'Nema bilješki'}\n\n` +
@@ -90,13 +90,13 @@
                             `SLIKE:\n${images.length > 0 ? images.join('\n') : 'Nema slika'}\n\n` +
                             `\nPoslano sa Student Fun Zone Vision Board aplikacije.`;
 
-                // Create mailto link
+                
                 const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 
-                // Open email client
+               
                 window.location.href = mailtoLink;
                 
-                // Close modal and clear input
+                
                 document.getElementById('emailModal').style.display = 'none';
                 document.getElementById('emailInput').value = '';
             } else {
@@ -104,7 +104,7 @@
             }
         });
 
-        // Close email modal when clicking outside
+       
         window.addEventListener('click', (event) => {
             const emailModal = document.getElementById('emailModal');
             if (event.target === emailModal) {
@@ -113,7 +113,7 @@
             }
         });
 
-        // Close modal with Escape key
+        
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 document.getElementById('emailModal').style.display = 'none';

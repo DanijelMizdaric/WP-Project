@@ -10,7 +10,7 @@
 <body>
     <h1>🖊️ Interaktivni Whiteboard</h1>
 
-    <!-- Toolbar for controls -->
+  
     <div class="toolbar">
         <label for="colorPicker">Boja:</label>
         <input type="color" id="colorPicker" value="#000000">
@@ -25,10 +25,10 @@
         <button id="sendEmailBtn">Pošalji mailom</button>
     </div>
 
-    <!-- Drawing area -->
+   
     <canvas id="board" width="900" height="500"></canvas>
 
-    <!-- Email Modal -->
+    
     <div id="emailModal" class="modal">
         <div class="modal-content">
             <h3>Pošalji Whiteboard crtež mailom</h3>
@@ -46,24 +46,24 @@
 
     <script src="javascript3.js"></script>
     <script>
-        // PDF Export Functionality
+       
         document.getElementById('savePdfBtn').addEventListener('click', () => {
             const canvas = document.getElementById('board');
             
-            // Create a temporary container for the canvas
+            
             const container = document.createElement('div');
             container.style.padding = '20px';
             container.style.backgroundColor = 'white';
             container.style.textAlign = 'center';
             
-            // Add title
+            
             const title = document.createElement('h2');
             title.textContent = 'Interaktivni Whiteboard Crtež';
             title.style.color = '#2c3e50';
             title.style.marginBottom = '20px';
             container.appendChild(title);
             
-            // Add canvas as image
+           
             const img = document.createElement('img');
             img.src = canvas.toDataURL('image/png');
             img.style.maxWidth = '100%';
@@ -71,7 +71,7 @@
             img.style.borderRadius = '10px';
             container.appendChild(img);
             
-            // Add footer
+			
             const footer = document.createElement('p');
             footer.textContent = 'Kreirano sa Interaktivni Whiteboard aplikacijom';
             footer.style.marginTop = '20px';
@@ -93,7 +93,7 @@
             html2pdf().set(options).from(container).save();
         });
 
-        // Email Modal Functionality
+       
         document.getElementById('sendEmailBtn').addEventListener('click', () => {
             document.getElementById('emailModal').style.display = 'block';
         });
@@ -109,24 +109,20 @@
                 const canvas = document.getElementById('board');
                 const drawingDataURL = canvas.toDataURL('image/png');
                 
-                // Create email content
+                
                 const subject = 'Moj Whiteboard Crtež';
                 const body = `Pogledajte moj crtež sa Interaktivnog Whiteboarda!\n\n` +
                             `Crtež je priložen kao slika ili možete pregledati u prilogu.\n\n` +
                             `Poslano sa Interaktivni Whiteboard aplikacije.\n\n` +
                             `Datum: ${new Date().toLocaleDateString()}`;
 
-                // Create mailto link with the drawing as attachment reference
-                // Note: Direct image embedding in mailto is limited, so we reference it
+               
                 const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 
-                // Open email client
+               
                 window.location.href = mailtoLink;
                 
-                // For a more advanced solution, you could upload the image to a service
-                // and include the link in the email body
-                
-                // Close modal and clear input
+              
                 document.getElementById('emailModal').style.display = 'none';
                 document.getElementById('emailInput').value = '';
             } else {
@@ -134,7 +130,7 @@
             }
         });
 
-        // Close email modal when clicking outside
+       
         window.addEventListener('click', (event) => {
             const emailModal = document.getElementById('emailModal');
             if (event.target === emailModal) {
@@ -143,7 +139,7 @@
             }
         });
 
-        // Close modal with Escape key
+       
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 document.getElementById('emailModal').style.display = 'none';
@@ -151,7 +147,7 @@
             }
         });
 
-        // Enhanced email function with image download suggestion
+       
         function sendEmailWithDrawing(email) {
             const canvas = document.getElementById('board');
             const link = document.createElement('a');
@@ -159,7 +155,7 @@
             link.href = canvas.toDataURL('image/png');
             link.click();
             
-            // After downloading, open email client
+          
             setTimeout(() => {
                 const subject = 'Moj Whiteboard Crtež';
                 const body = `Pogledajte moj crtež sa Interaktivnog Whiteboarda!\n\n` +

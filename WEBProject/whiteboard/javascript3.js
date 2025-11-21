@@ -1,4 +1,4 @@
-/* ====== Prikupi sve DOM elemente ====== */
+
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
 
@@ -8,12 +8,10 @@ const clearBtn = document.getElementById("clearBtn");
 const saveBtn = document.getElementById("saveBtn");
 const eraserBtn = document.getElementById("eraserBtn");
 
-/* ====== Pocetne postavke ====== */
 let drawing = false;
 let currentColor = colorPicker.value;
 let isErasing = false;
 
-/* ====== Funkcije crtanja ====== */
 function startDraw(e) {
     drawing = true;
     draw(e);
@@ -29,7 +27,6 @@ function draw(e) {
 
     const rect = canvas.getBoundingClientRect();
 
-    // Prilagodite položaj miša veličini ploče
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
@@ -49,12 +46,11 @@ function draw(e) {
     ctx.moveTo(x, y);
 }
 
-/* ====== Mouse Events ====== */
+
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mouseup", endDraw);
 canvas.addEventListener("mousemove", draw);
 
-/* ====== Touch Events (mobile/tablet) ====== */
 canvas.addEventListener("touchstart", startDraw);
 canvas.addEventListener("touchmove", (e) => {
     draw(e);
@@ -62,7 +58,6 @@ canvas.addEventListener("touchmove", (e) => {
 });
 canvas.addEventListener("touchend", endDraw);
 
-/* ====== Toolbar Logic ====== */
 colorPicker.addEventListener("input", () => {
     currentColor = colorPicker.value;
     isErasing = false;

@@ -75,77 +75,60 @@
 
     <script src="javascript1.js"></script>
     <script>
-        // PDF Export Functionality
-        document.getElementById('savePdfBtn').addEventListener('click', () => {
-            const element = document.getElementById('kanbanContent');
-            const options = {
-                margin: 0.5,
-                filename: 'Kanban_Ploča.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(options).from(element).save();
+    
+    document.getElementById('savePdfBtn').addEventListener('click', async () => {
+        const element = document.getElementById('kanbanContent');
+        
+        
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: true
         });
+        
+       
+        const container = document.createElement('div');
+        container.style.padding = '20px';
+        container.style.backgroundColor = 'white';
+        container.style.textAlign = 'center';
+        
+  
+        const title = document.createElement('h2');
+        title.textContent = 'Kanban Ploča';
+        title.style.color = '#2c3e50';
+        title.style.marginBottom = '20px';
+        container.appendChild(title);
+        
+  
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.style.maxWidth = '100%';
+        img.style.border = '2px solid #e1e8ed';
+        img.style.borderRadius = '10px';
+        container.appendChild(img);
+        
+       
+        const footer = document.createElement('p');
+        footer.textContent = 'Kreirano sa Kanban aplikacijom';
+        footer.style.marginTop = '20px';
+        footer.style.color = '#6c757d';
+        footer.style.fontSize = '12px';
+        container.appendChild(footer);
 
-        // Email Modal Functionality
-        document.getElementById('sendEmailBtn').addEventListener('click', () => {
-            document.getElementById('emailModal').style.display = 'block';
-        });
-
-        document.getElementById('emailCancel').addEventListener('click', () => {
-            document.getElementById('emailModal').style.display = 'none';
-            document.getElementById('emailInput').value = '';
-        });
-
-        document.getElementById('emailSend').addEventListener('click', () => {
-            const email = document.getElementById('emailInput').value;
-            if (email) {
-                // Get all tasks from the board
-                const tasks = [];
-                document.querySelectorAll('.task').forEach(task => {
-                    tasks.push(task.textContent);
-                });
-
-                // Create email content
-                const subject = 'Kanban Ploča - Trenutni zadaci';
-                const body = `Trenutni zadaci na Kanban ploči:\n\n` +
-                            `TO DO:\n${getTasksByColumn('todo')}\n\n` +
-                            `IN PROGRESS:\n${getTasksByColumn('progress')}\n\n` +
-                            `DONE:\n${getTasksByColumn('done')}\n\n` +
-                            `\nPoslano sa Kanban aplikacije.`;
-
-                // Create mailto link
-                const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                // Open email client
-                window.location.href = mailtoLink;
-                
-                // Close modal and clear input
-                document.getElementById('emailModal').style.display = 'none';
-                document.getElementById('emailInput').value = '';
-            } else {
-                alert('Molimo unesite email adresu!');
-            }
-        });
-
-        // Helper function to get tasks by column
-        function getTasksByColumn(status) {
-            const column = document.querySelector(`[data-status="${status}"]`);
-            const tasks = Array.from(column.querySelectorAll('.task')).map(task => 
-                `• ${task.textContent}`
-            );
-            return tasks.length > 0 ? tasks.join('\n') : 'Nema zadataka';
-        }
-
-        // Close email modal when clicking outside
-        window.addEventListener('click', (event) => {
-            const emailModal = document.getElementById('emailModal');
-            if (event.target === emailModal) {
-                emailModal.style.display = 'none';
-                document.getElementById('emailInput').value = '';
-            }
-        });
-    </script>
+        const options = {
+            margin: 0.5,
+            filename: 'Kanban_Ploča.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2,
+                backgroundColor: '#ffffff'
+            },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        
+        html2pdf().set(options).from(container).save();
+    });
+</script>
 </body>
 </html>

@@ -97,7 +97,6 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-/* Modal background */
 .modal {
     display: none;
     position: fixed;
@@ -110,7 +109,6 @@ button:hover {
     backdrop-filter: blur(5px);
 }
 
-/* Modal box */
 .modal-content {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     width: 350px;
@@ -146,7 +144,6 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Buttons */
 .modal-buttons {
     margin-top: 25px;
 }
@@ -186,7 +183,6 @@ button:hover {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
-/* Subtle animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -202,7 +198,6 @@ button:hover {
     animation: fadeIn 0.6s ease-out;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .board {
         flex-direction: column;
@@ -220,7 +215,6 @@ button:hover {
     }
 }
 
-/* Additional styles for new buttons and email modal */
 #savePdfBtn {
     background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
     box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
@@ -241,7 +235,6 @@ button:hover {
     box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
 }
 
-/* Email modal specific styles */
 #emailModal input[type="email"] {
     width: 90%;
     padding: 12px;
@@ -259,7 +252,6 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Responsive design for new buttons */
 @media (max-width: 768px) {
     .buttons {
         flex-direction: column;

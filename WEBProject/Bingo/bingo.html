@@ -5,6 +5,7 @@
     <title>Bingo Challenge</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -59,16 +60,75 @@
     <button class="pdf-btn">Preuzmi kao PDF</button>
 
     <script>
-        document.querySelector(".pdf-btn").addEventListener("click", () => {
-            const element = document.getElementById("bingo-content");
-            const options = {
-                margin:       0.5,
-                filename:     'Bingo_Challenge.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(options).from(element).save();
+        document.querySelector(".pdf-btn").addEventListener("click", async () => {
+            const btn = document.querySelector('.pdf-btn');
+            const originalText = btn.textContent;
+            
+            try {
+                btn.textContent = 'Generišem PDF...';
+                btn.disabled = true;
+
+                const element = document.getElementById("bingo-content");
+                
+                
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    logging: true,
+                    scrollX: 0,
+                    scrollY: 0
+                });
+                
+                
+                const container = document.createElement('div');
+                container.style.padding = '20px';
+                container.style.backgroundColor = 'white';
+                container.style.textAlign = 'center';
+                
+                
+                const title = document.createElement('h2');
+                title.textContent = 'Bingo Challenge';
+                title.style.color = '#2c3e50';
+                title.style.marginBottom = '20px';
+                container.appendChild(title);
+                
+                
+                const img = document.createElement('img');
+                img.src = canvas.toDataURL('image/png');
+                img.style.maxWidth = '100%';
+                img.style.border = '2px solid #e1e8ed';
+                img.style.borderRadius = '10px';
+                container.appendChild(img);
+                
+              
+                const footer = document.createElement('p');
+                footer.textContent = 'Kreirano sa Bingo aplikacijom';
+                footer.style.marginTop = '20px';
+                footer.style.color = '#6c757d';
+                footer.style.fontSize = '12px';
+                container.appendChild(footer);
+
+                const options = {
+                    margin: 0.5,
+                    filename: 'Bingo_Challenge.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        backgroundColor: '#ffffff'
+                    },
+                    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+                };
+                
+                await html2pdf().set(options).from(container).save();
+                
+            } catch (error) {
+                console.error('PDF error:', error);
+                alert('Greška pri generisanju PDF-a. Pokušajte ponovo.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
         });
     </script>
 

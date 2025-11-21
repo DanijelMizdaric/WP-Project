@@ -1,6 +1,4 @@
-// ======= Vision Board Logic =======
 
-// Odaberi glavni element
 const board = document.getElementById("board");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const addImageBtn = document.getElementById("addImageBtn");
@@ -8,10 +6,9 @@ const addQuoteBtn = document.getElementById("addQuoteBtn");
 const saveBtn = document.getElementById("saveBtn");
 const clearBtn = document.getElementById("clearBtn");
 
-// Boje za ljepljive biljeÅ¡ke
+
 const colors = ["color1", "color2", "color3", "color4", "color5", "color6"];
 
-// Primjeri slika i citata
 const sampleImages = [
   "slike/slika1.png",
   "slike/slika2.png",
@@ -25,27 +22,27 @@ const sampleQuotes = [
   "â€œNe osnivate zajednice. Zajednice veÄ‡ postoje. Pitanje koje treba postaviti je kako im moÅ¾ete pomoÄ‡i da budu bolje.â€â€“ Mark Zuckerberg"
 ];
 
-// ======= Usluzni program za stvaranje stavki koje se mogu povlaciti i brisati =======
+
 function makeDraggable(el) {
   let offsetX, offsetY;
 
-  // Kreiranje delete (X) button
+  
   const delBtn = document.createElement("button");
   delBtn.textContent = "ðŸ“Œ";
   delBtn.className = "delete-btn";
   el.appendChild(delBtn);
 
-  // Brisanje elementa na click
+  
   delBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent starting drag
+    e.stopPropagation();
     el.remove();
   });
 
-  // logika povlacenja
+  
   el.addEventListener("mousedown", dragStart);
 
   function dragStart(e) {
-    if (e.target === delBtn) return; // preskoci povlacenja ako se klikne X
+    if (e.target === delBtn) return;
     offsetX = e.clientX - el.offsetLeft;
     offsetY = e.clientY - el.offsetTop;
     document.addEventListener("mousemove", drag);
@@ -64,7 +61,7 @@ function makeDraggable(el) {
   }
 }
 
-// ======= Dodaj Post It =======
+
 addNoteBtn.addEventListener("click", () => {
   const note = document.createElement("div");
   note.className = "note " + colors[Math.floor(Math.random() * colors.length)];
@@ -76,7 +73,7 @@ addNoteBtn.addEventListener("click", () => {
   board.appendChild(note);
 });
 
-// ======= Dodatj sliku =======
+
 addImageBtn.addEventListener("click", () => {
   const div = document.createElement("div");
   div.className = "pinned-img";
@@ -89,7 +86,7 @@ addImageBtn.addEventListener("click", () => {
   board.appendChild(div);
 });
 
-// ======= Dodaj citat =======
+
 addQuoteBtn.addEventListener("click", () => {
   const q = document.createElement("div");
   q.className = "quote";
@@ -101,7 +98,7 @@ addQuoteBtn.addEventListener("click", () => {
   board.appendChild(q);
 });
 
-// ======= Snimi Visual Board =======
+
 saveBtn.addEventListener("click", saveBoard);
 
 function saveBoard() {
@@ -124,7 +121,7 @@ function saveBoard() {
   alert("Board saved!");
 }
 
-// ======= Ucitaj Visual Board =======
+
 function loadBoard() {
   const data = localStorage.getItem("visionBoardItems");
   if (!data) return;
@@ -142,7 +139,7 @@ function loadBoard() {
 }
 loadBoard();
 
-// ======= Ocisti Visual Board =======
+
 clearBtn.addEventListener("click", () => {
   if (confirm("Clear the board?")) {
     board.innerHTML = "";

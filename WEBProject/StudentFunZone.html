@@ -11,6 +11,7 @@
             display: inline-block;
             width: 100%;
             max-width: 300px;
+            margin-bottom: 20px;
         }
 
         .dropdown-toggle {
@@ -67,6 +68,7 @@
             border-bottom: 1px solid #e1e8ed;
             transition: all 0.3s ease;
             font-weight: 500;
+            cursor: pointer;
         }
 
         .dropdown-item:last-child {
@@ -104,6 +106,32 @@
         .dropdown-backdrop.show {
             display: block;
         }
+
+        /* App container styles */
+        .app-container {
+            min-height: 600px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            margin-top: 20px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .app-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+            font-size: 18px;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -133,13 +161,20 @@
                 Odaberite igru 
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="Bingo/bingo.html" class="dropdown-item">Bingo</a>
-                <a href="Kviz/quiz.html" class="dropdown-item">Kviz</a>
-                <a href="Kanban/index1.html" class="dropdown-item">Kanban Ploča</a>
-                <a href="Visionboard/index2.html" class="dropdown-item">Vision Board</a>
-                <a href="whiteboard/index3.html" class="dropdown-item">Interaktivni Whiteboard</a>
+                <a href="#" data-app="Bingo/bingo.html" class="dropdown-item">Bingo</a>
+                <a href="#" data-app="Kviz/quiz.html" class="dropdown-item">Kviz</a>
+                <a href="#" data-app="Kanban/index1.html" class="dropdown-item">Kanban Ploča</a>
+                <a href="#" data-app="Visionboard/index2.html" class="dropdown-item">Vision Board</a>
+                <a href="#" data-app="Whiteboard/index3.html" class="dropdown-item">Interaktivni Whiteboard</a>
             </div>
             <div class="dropdown-backdrop" id="dropdownBackdrop"></div>
+        </div>
+
+        <div class="app-container" id="appContainer">
+            <div class="welcome-message">
+                <h3>Dobrodošli u Student Fun Zone!</h3>
+                <p>Odaberite aplikaciju iz padajućeg menija iznad da biste počeli sa igrom.</p>
+            </div>
         </div>
     </article>
 
@@ -147,63 +182,84 @@
         &copy; Internacionalna poslovno-informaciona akademija Tuzla
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.getElementById('gamesDropdown');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const dropdownBackdrop = document.getElementById('dropdownBackdrop');
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.getElementById('gamesDropdown');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownBackdrop = document.getElementById('dropdownBackdrop');
+    const appContainer = document.getElementById('appContainer');
 
-            // Toggle dropdown
-            dropdownToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const isOpen = dropdownMenu.classList.contains('show');
-                
-                if (isOpen) {
-                    closeDropdown();
-                } else {
-                    openDropdown();
-                }
-            });
+    
+    dropdownToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = dropdownMenu.classList.contains('show');
+        
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    });
 
-            // Close dropdown when clicking on backdrop
-            dropdownBackdrop.addEventListener('click', function() {
-                closeDropdown();
-            });
+    
+    dropdownBackdrop.addEventListener('click', function() {
+        closeDropdown();
+    });
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                    closeDropdown();
-                }
-            });
+   
+    document.addEventListener('click', function(e) {
+        if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            closeDropdown();
+        }
+    });
 
-            // Close dropdown when pressing Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeDropdown();
-                }
-            });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDropdown();
+        }
+    });
 
-            function openDropdown() {
-                dropdownMenu.classList.add('show');
-                dropdownBackdrop.classList.add('show');
-                dropdownToggle.style.borderRadius = '8px 8px 0 0';
-            }
-
-            function closeDropdown() {
-                dropdownMenu.classList.remove('show');
-                dropdownBackdrop.classList.remove('show');
-                dropdownToggle.style.borderRadius = '8px';
-            }
-
-            // Update button text when selecting an item
-            dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    dropdownToggle.textContent = this.textContent + ' ▼';
-                });
-            });
+   
+    dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const appUrl = this.getAttribute('data-app');
+            loadApp(appUrl, this.textContent);
+            closeDropdown();
         });
-    </script>
+    });
+
+    function openDropdown() {
+        dropdownMenu.classList.add('show');
+        dropdownBackdrop.classList.add('show');
+        dropdownToggle.style.borderRadius = '8px 8px 0 0';
+    }
+
+    function closeDropdown() {
+        dropdownMenu.classList.remove('show');
+        dropdownBackdrop.classList.remove('show');
+        dropdownToggle.style.borderRadius = '8px';
+    }
+
+   function loadApp(appUrl, appName) {
+    dropdownToggle.textContent = appName + ' ▼';
+    
+    appContainer.innerHTML = `
+        <iframe 
+            src="${appUrl}" 
+            class="app-iframe" 
+            title="${appName}" 
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-downloads"
+            style="border:none; width:100%; height:600px;">
+        </iframe>
+    `;
+}
+
+});
+</script>
+
 
 </body>
 </html>

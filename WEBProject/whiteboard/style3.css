@@ -80,7 +80,6 @@ footer {
     text-align: center;
 }
 
-/* Additional styling for color picker and other inputs */
 .toolbar input[type="color"] {
     width: 40px;
     height: 40px;
@@ -132,7 +131,6 @@ footer {
     outline: none;
 }
 
-/* Animation for page load */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -156,7 +154,6 @@ canvas {
     animation-delay: 0.2s;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     body {
         padding: 15px;
@@ -183,7 +180,6 @@ canvas {
     }
 }
 
-/* Additional styles for new buttons and email modal */
 #savePdfBtn {
     background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
     box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
@@ -206,7 +202,6 @@ canvas {
     box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
 }
 
-/* Email modal styling */
 #emailModal {
     display: none;
     position: fixed;
@@ -288,7 +283,6 @@ canvas {
     box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
 }
 
-/* Responsive design for toolbar */
 @media (max-width: 768px) {
     .toolbar {
         flex-wrap: wrap;
@@ -315,7 +309,6 @@ canvas {
     }
 }
 
-/* Animation for modal */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -327,7 +320,6 @@ canvas {
     }
 }
 
-/* Ensure canvas is responsive */
 #board {
     max-width: 100%;
     height: auto;

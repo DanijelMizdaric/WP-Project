@@ -76,7 +76,7 @@ p {
     transform: translateY(0);
 }
 
-/* Remove the colored header row styles */
+
 table tr:first-child td {
     background: white;
     color: #2c3e50;
@@ -88,14 +88,14 @@ table tr:first-child td:hover {
     background: #f8f9fa;
 }
 
-/* Style for the free space cell */
+
 td:has(b) {
     background: #f8f9fa;
     font-weight: 600;
     color: #667eea;
 }
 
-/* Subtle animation for page load */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -115,7 +115,7 @@ table, h1, p, .pdf-btn {
     animation-delay: 0.2s;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     body {
         padding: 20px 10px;

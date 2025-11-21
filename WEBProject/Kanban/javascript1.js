@@ -1,4 +1,4 @@
-// Dodaj zadatak
+
 const modal = document.getElementById("taskModal");
 const taskInput = document.getElementById("taskInput");
 
@@ -8,7 +8,7 @@ document.getElementById("addTaskBtn").addEventListener("click", () => {
     taskInput.focus();
 });
 
-// Handle modal buttons
+
 document.getElementById("modalAdd").addEventListener("click", () => {
     let text = taskInput.value.trim();
     if (text === "") return;
@@ -24,7 +24,7 @@ document.getElementById("modalCancel").addEventListener("click", () => {
 });
 
 
-// Kreiraj novi zadatak
+
 function createTask(text) {
     const task = document.createElement("div");
     task.classList.add("task");
@@ -43,7 +43,7 @@ function createTask(text) {
     return task;
 }
 
-// Handle Drag & Drop
+
 document.querySelectorAll(".taskList").forEach(list => {
     list.addEventListener("dragover", e => {
         e.preventDefault();
@@ -52,32 +52,31 @@ document.querySelectorAll(".taskList").forEach(list => {
     });
 });
 
-// Ocisti plocu
+
 const clearModal = document.getElementById("clearModal");
 
 document.getElementById("clearBoardBtn").addEventListener("click", () => {
     clearModal.style.display = "block";
 });
 
-// â€œDA - Ocisti plocuâ€ button
+
 document.getElementById("clearYes").addEventListener("click", () => {
     document.querySelectorAll(".taskList").forEach(list => list.innerHTML = "");
     clearModal.style.display = "none";
 });
 
-// â€œNE â€“ Cancelâ€ button
+
 document.getElementById("clearNo").addEventListener("click", () => {
     clearModal.style.display = "none";
 });
 
-// Zatvori van modala
 window.addEventListener("click", e => {
     if (e.target === clearModal) {
         clearModal.style.display = "none";
     }
 });
 
-// Snimi plocu kao PNG
+
 document.getElementById("saveBoardBtn").addEventListener("click", () => {
     html2canvas(document.body).then(canvas => {
         const link = document.createElement("a");
@@ -87,7 +86,7 @@ document.getElementById("saveBoardBtn").addEventListener("click", () => {
     });
 });
 
-// Ucitaj html2canvas dynamically
+
 const script = document.createElement("script");
 script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
 document.body.appendChild(script);
