@@ -1,113 +1,32 @@
 # IPI Akademija - Kursevi & Student Fun Zone
 
-Sveobuhvatni website za IPI Akademiju koji sadrži informacije o kursevima i interaktivne studentske aplikacije. Izrađen koristeći HTML, CSS i JavaScript.
+Website za IPI Akademiju koji sadrži informacije o kursevima i interaktivne studentske aplikacije. 
 
-## Pregled Projekta
+Izgradjen koristeci tehnologije poput HTML5 za strukturu, CSS3 za styling sa gradijentima i animacijama, te JavaScript za interaktivnu funkcionalnost.
+Dodatno koristen html2pdf.js library za PDF dokumente i html2canvas za pretvaranja HTML u sliku.
 
-Ovaj projekt se sastoji od dva glavna dijela:
-1. Websajt sa informacijama o kursevima - Zvanični websajt IPI Akademije
-2. Student Fun Zone - Kolekcija interaktivnih web aplikacija
 
-3. # Stranice Websajta
+U glavnom folderu se odmah nalaze osnovne HTML stranice za prezentaciju kurseva: index.html kao početnu stranicu, 
+popis.html sa popisom kurseva, raspored.html sa detaljnim rasporedom, kontakt.html sa kontakt informacijama i studentfunzone.html
+koji služi kao centralni hub za sve interaktivne aplikacije.
 
-# Glavni Websajt Kurseva
-- Početna Strana (`index.html`) - Opšti pregled kurseva IPI Akademije
-- Popis Kurseva (`popis.html`) - Detaljan spisak dostupnih kurseva
-- Raspored (`raspored.html`) - Raspored održavanja kurseva
-- Kontakt (`kontakt.html`) - Lokacija i kontakt informacije
-- Student Fun Zone(`studentfunzone.html`) - Portal ka interaktivnim aplikacijama
+U okviru projekta nalaze se specijalizovani folderi za svaku aplikaciju:
+Bingo folder sadrži Bingo Challenge igru, 
+Kviz folder ima interaktivni kviz o web tehnologijama, 
+Kanban folder sadrži ploču za upravljanje zadacima, 
+Visionboard folder ima digitalni vision board,
+Whiteboard folder sadrži interaktivnu ploču za crtanje. 
 
-# Kategorije Kurseva
-1. Osnove korištenja računara i Interneta
-   - Osnove računara (Windows)
-   - Osnove komunikacija (Internet Explorer, Outlook)
-   - Obrada teksta (Word)
-   - Proračunske tabele (Excel)
-   - Korištenje baza podataka (Access)
-   - Prezentacije (PowerPoint)
-   - IT sigurnost
-   - Online saradnja
+Sajt nudi kompletan sistem o kursevima IPI akademija i responzivan dizajn, koji sadrzi efekte kao gradijent pozadine, animacije, i hover efekte.
+Svaki folder ima svoje HTML, CSS i JavaScript fajlove.
 
-2. Web Tehnologije
-   - Uvod u HTML
-   - Uvod u CSS
-   - Osnove JavaScripta
-   - Uvod u XML
+Nakon otvaranja index.html korisnici mogu navigirati kroz različite sekcije sajta koristeći glavni navigacioni meni. 
+Za pristup interaktivnim aplikacijama potrebno je otvoriti Student Fun Zone stranicu i odabrati željenu aplikaciju iz padajućeg menija.
 
-# Student Fun Zone Aplikacije
+Svaka aplikacija ima intuitivan interfejs sa jasno označenim kontrolama. 
+Bingo igra se igra pronalaženjem osoba koje odgovaraju opisima u ćelijama. 
+Kviz se rješava odabirom tačnih odgovora na postavljena pitanja. 
+Kanban ploča se koristi dodavanjem zadataka i njihovim premještanjem između kolona. 
+Vision Board omogućava kreiranje i organizovanje elemenata povlačenjem, 
+Whiteboard nudi alate za crtanje i skiciranje.
 
-## Bingo Izazov
-- Interaktivna 5x5 bingo mreža
-- Društvena mehanika igre
-- PDF izvoz funkcionalnost
-- Slanje emailom
-
-## Kviz Aplikacija
-- Pitanja sa višestrukim izborom
-- Praćenje rezultata i tajmer
-- Sažetak rezultata
-
-## Kanban Ploča
-- Upravljanje zadacima povlačenjem i ispuštanjem
-- Trodijelni radni tok (To Do, In Progress, Done)
-- Lokalno čuvanje podataka
-- PDF izvoz i slanje emailom
-
-## Vision Board
-- Šarene ljepljive bilješke
-- Funkcionalnost prikvačivanja slika
-- Inspirativni citati
-- Čuvanje/učitavanje funkcionalnost
-- PDF izvoz i slanje emailom
-
-## Interaktivna Whiteboard
-- Crtanje u realnom vremenu
-- Podešavanje veličine i boje četke
-- Alatka za brisanje
-- PDF izvoz i slanje emailom
-
-# Korištene Tehnologije
-
-## Frontend
-- HTML5 - Semantičko označavanje
-- CSS3 - Moderno stiliziranje sa gradijentima i animacijama
-- JavaScript (ES6+) - Interaktivna funkcionalnost
-
-## Biblioteke i API-ji
-- html2pdf.js - Generisanje PDF dokumenata
-- Local Storage API - Čuvanje podataka
-- Canvas API - Crtanje na whiteboardu
-
-## Karakteristike
-- Responsivni dizajn
-- Kompatibilnost sa različitim preglednicima
-- Mobilno prilagođeni interfejsi
-- Moderan UI/UX dizajn
-
-# Ključne Karakteristike
-
-## Zajednička Funkcionalnost
-- PDF Izvoz - Sve aplikacije podržavaju preuzimanje PDF-a
-- Slanje Emailom - Mailto integracija za dijeljenje sadržaja
-- Responsivni Dizajn - Radi na desktop i mobilnim uređajima
-- Moderan UI - Konzistentno stiliziranje sa gradijentima i animacijama
-
-## Navigacija
-- Konzistentno zaglavlje sa logom IPI Akademije
-- Ujednačeni meni za navigaciju na svim stranicama
-- Padajući meni za Student Fun Zone igre
-
-# Kontakt Informacije
-
-IPI Akademija
-- Adresa: Kulina bana br. 2 (Skver), Tuzla 75000, Bosna i Hercegovina
-- Email: [info@ipi-akademija.ba](mailto:info@ipi-akademija.ba)
-- Websajt: [http://ipi-akademija.ba/](http://ipi-akademija.ba/)
-
-# 📄 Licenca
-
-© Internacionalna poslovno-informaciona akademija Tuzla
-
----
-
-*Izrađeno za kurs Web programiranje 2025 - Internacionalna poslovno-informaciona akademija Tuzla*
